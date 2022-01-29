@@ -33,11 +33,13 @@ const questions = () => {
             type: 'input',
             name: 'usage',
             message: 'Please provide usage information',
+            default: ""
         },
         {
             type: 'input',
             name: 'contributors',
-            message: 'Please provide name who contributed this'
+            message: 'Please provide name who contributed this',
+            default: ""
         },        
         // {
         //     type: 'confirm',
@@ -70,7 +72,8 @@ const questions = () => {
         {
             type: 'input',
             name: 'email',
-            message: 'What is your email address?'
+            message: 'What is your email address? (Required)',
+            validate: emailInput => emailInput ? true : false 
         }
     ]);
 }
