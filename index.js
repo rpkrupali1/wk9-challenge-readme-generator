@@ -1,13 +1,86 @@
-// TODO: Include packages needed for this application
+//packages needed for this application
+const inquirer = require('inquirer');
+const generateMarkdown = require('./utils/generateMarkdown')
+const writeToFile = require('./utils/generateFiles');
 
-// TODO: Create an array of questions for user input
-const questions = [];
+//array of questions for user input
+const questions = () => {
+    return inquirer.prompt([
+        {
+            type: 'input',
+            name: 'name',
+            message: 'What is name of your repository? (Required)',
+            validate: nameInput => nameInput ? true : false
+        },
+        {
+            type: 'input',
+            name: 'description',
+            message: 'Please provide description of your repository. (Required)',
+            validate: descriptionInput => descriptionInput ? true : false
+        },
+        {
+            type: 'input',
+            name: 'purpose',
+            message: 'Please provide purpose for your repository.'
+        },
+        {
+            type: 'input',
+            name: 'installGuide',
+            message: 'Please provide installation instructions. (Required)',
+            validate: installInput => installInput ? true : false
+        },
+        {
+            type: 'input',
+            name: 'usage',
+            message: 'Please provide usage information',
+        },
+        {
+            type: 'input',
+            name: 'contributors',
+            message: 'Please provide name who contributed this'
+        },        
+        // {
+        //     type: 'confirm',
+        //     name: 'confirmAddContributor',
+        //     message: 'would you like to add another contributor?',
+        //     default: false
+        // },
+        {
+            type: 'input',
+            name: 'technologies',
+            message: 'Please provide all technologies used to build this application seperated by comma'
+        },
+        {
+            type: 'input',
+            name: 'testInstructions',
+            message: 'Please provide test instructions'
+        },
+        {
+            type: 'checkbox',
+            name: 'license',
+            message: 'Please choose license from given option (Check all that apply)',
+            choices: ['MIT', 'Apache','Mozilla']
+        },
+        {
+            type: 'input',
+            name: 'githubUser',
+            message: 'What is your github user name? (Required)',
+            validate: githubNameInput => githubNameInput ? true : false
+        },
+        {
+            type: 'input',
+            name: 'email',
+            message: 'What is your email address?'
+        }
+    ]);
+}
 
-// TODO: Create a function to write README file
-function writeToFile(fileName, data) {}
-
-// TODO: Create a function to initialize app
-function init() {}
+// function to initialize app
+function init() {
+    questions()
+        .then(data => generateMarkdown(data))
+        .then(data => writeToFile('./dist/README.md',data));
+}
 
 // Function call to initialize app
 init();
