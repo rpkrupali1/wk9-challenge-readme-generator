@@ -67,8 +67,11 @@
   
   THEN I am taken to the corresponding section of the README
 
-  Please watch below video on how read me is generated on executing this application:
-  [Watch the video](./assets/ReadMeGenerator.webm)
+  Please watch below video on how read me is generated on executing this application: 
+
+  https://user-images.githubusercontent.com/38411252/151729745-05a8a2a4-f5b3-43fd-92fb-5faf88b5045e.mp4
+
+
 
   ** Just FYI: This read me is created using this generator and little bit modified to add more contents like video link.
   ## Questions
