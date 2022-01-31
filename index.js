@@ -39,14 +39,9 @@ const questions = () => {
             type: 'input',
             name: 'contributors',
             message: 'Please provide name who contributed this',
-            default: ""
-        },        
-        // {
-        //     type: 'confirm',
-        //     name: 'confirmAddContributor',
-        //     message: 'would you like to add another contributor?',
-        //     default: false
-        // },
+            default: "",
+
+        },
         {
             type: 'input',
             name: 'technologies',

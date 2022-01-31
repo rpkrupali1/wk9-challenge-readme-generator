@@ -4,18 +4,6 @@ const { license } = require("../test/sample-answers");
 
 // If there is no license, return an empty string
 function renderLicenseBadge(license) {
-
-}
-
-//Create a function that returns the license link
-// If there is no license, return an empty string
-function renderLicenseLink(license) {
-  //[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-}
-
-// TODO: Create a function that returns the license section of README
-// If there is no license, return an empty string
-function renderLicenseSection(license) {
   var licenses = "";
   if(license){
     for (let i = 0; i < license.length; i++) {
@@ -30,12 +18,34 @@ function renderLicenseSection(license) {
   else return "";
 }
 
+//Create a function that returns the license link
+// If there is no license, return an empty string
+function renderLicenseLink(license) {
+  //[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+  if(license){    
+    return `\n* [License](#license)\n`;
+  }
+  else return "";
+}
+
+// TODO: Create a function that returns the license section of README
+// If there is no license, return an empty string
+function renderLicenseSection(license) {
+  if(license){
+    return `
+    ## License
+    Please consult the attached LICENSE file for details. All rights not explicitly granted by the ${license} License are reserved by Original Author.
+    `
+  }
+  else return "";
+}
+
 // TODO: Create a function to generate markdown for README
 function generateMarkdown(data) {
   return `# ${data.name}
   ${data.description}
 
-  ${renderLicenseSection(data.license)}
+  ${renderLicenseBadge(data.license)}
 
   # Table of contents
   * [Purpose](#purpose)
@@ -44,7 +54,7 @@ function generateMarkdown(data) {
   * [Contributors](#contributors)
   * [Test Instructions](#test-instructions)
   * [Questions](#questions)
-  * [License](#license)
+  ${renderLicenseLink(data.license)}
 
   ## Purpose
   ${data.purpose}
@@ -65,8 +75,7 @@ function generateMarkdown(data) {
   Please reach out to us for any questions [here](https://github.com/${data.githubUser}).
   Or you can also send me your questions through email at [${data.email}](mailto:${data.email})
 
-  ## License
-  Please consult the attached LICENSE file for details. All rights not explicitly granted by the ${data.license} License are reserved by Original Author.
+  ${renderLicenseSection(data.license)}
 
   Copyright (c) 2021
 `;
