@@ -1,84 +1,71 @@
-//packages needed for this application
 const inquirer = require('inquirer');
-const generateMarkdown = require('./utils/generateMarkdown')
-const writeToFile = require('./utils/generateFiles');
+const Engineer = require('./lib/Engineer');
+const Intern = require('./lib/Intern');
+const Manager = require('./lib/Manager');
+const generatePage = require('./src/generateHtmlTemplate');
+const generateFile = require('./utils/generatehtmlFile');
+var teamMembers = [];
 
-//array of questions for user input
-const questions = () => {
+const getTeamMemberInfo = () => {        
     return inquirer.prompt([
+        { 
+        type: 'input',
+        name: 'name',
+        message: 'What is your name? (Required) ',
+        validate: name => name ? true : false
+        },
         {
-            type: 'input',
-            name: 'name',
-            message: 'What is name of your repository? (Required)',
-            validate: nameInput => nameInput ? true : false
+        type: 'input',
+        name: 'email',
+        message: 'Please enter your valid email (Required)',
+        validate: email => email ? true : false
+        },
+        {
+            type: 'list',
+            name: 'role',
+            message: 'Please select your role (Required)',
+            choices:  ['Manager', 'Engineer', 'Intern']
         },
         {
             type: 'input',
-            name: 'description',
-            message: 'Please provide description of your repository. (Required)',
-            validate: descriptionInput => descriptionInput ? true : false
-        },
-        {
-            type: 'input',
-            name: 'purpose',
-            message: 'Please provide purpose for your repository.'
-        },
-        {
-            type: 'input',
-            name: 'installGuide',
-            message: 'Please provide installation instructions. (Required)',
-            validate: installInput => installInput ? true : false
-        },
-        {
-            type: 'input',
-            name: 'usage',
-            message: 'Please provide usage information',
-            default: ""
-        },
-        {
-            type: 'input',
-            name: 'contributors',
-            message: 'Please provide name who contributed this',
-            default: "",
-
-        },
-        {
-            type: 'input',
-            name: 'technologies',
-            message: 'Please provide all technologies used to build this application seperated by comma'
-        },
-        {
-            type: 'input',
-            name: 'testInstructions',
-            message: 'Please provide test instructions'
-        },
-        {
-            type: 'checkbox',
-            name: 'license',
-            message: 'Please choose license from given option (Check all that apply)',
-            choices: ['MIT', 'Apache','Mozilla']
-        },
-        {
-            type: 'input',
-            name: 'githubUser',
+            name: 'github',
             message: 'What is your github user name? (Required)',
-            validate: githubNameInput => githubNameInput ? true : false
+            when: answers => answers.role === 'Engineer',
+            validate: role => role ? true : false
         },
         {
             type: 'input',
-            name: 'email',
-            message: 'What is your email address? (Required)',
-            validate: emailInput => emailInput ? true : false 
+            name: 'school',
+            message: 'What is your scool name? (Required)',
+            when: answers => answers.role === 'Intern',
+            validate: school => school ? true : false
+        },
+        {
+            type: 'confirm',
+            name: 'confirmAddTeamMember',
+            message: 'Would you like to add another team member?',
+            default: false
         }
-    ]);
-}
+    ])
+    .then(teamMemberData => {
+        let employee;
+        if(teamMemberData.role==='Manager')
+            employee = new Manager(teamMemberData.name,teamMemberData.email);
+        else if(teamMemberData.role==='Engineer')
+            employee = new Engineer(teamMemberData.name,teamMemberData.email,teamMemberData.github);
+        else if(teamMemberData.role==='Intern')
+            employee = new Intern(teamMemberData.name,teamMemberData.email,teamMemberData.school);
+        
+        teamMembers.push(employee);
 
-// function to initialize app
-function init() {
-    questions()
-        .then(data => generateMarkdown(data))
-        .then(data => writeToFile('./dist/README.md',data));
-}
+        if(teamMemberData.confirmAddTeamMember)
+            return getTeamMemberInfo();               
+        else
+            return teamMembers;
+    });   
+};
 
-// Function call to initialize app
-init();
+getTeamMemberInfo()
+.then(teamMembers => generatePage(teamMembers))
+.then(fileContents=> generateFile.generateFile('./dist/index.html',fileContents))
+.then(()=>generateFile.copyFile('./src/style.css','./dist/style.css'));

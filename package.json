@@ -1,25 +1,28 @@
 {
-  "name": "readme-generator",
+  "name": "team-profile-generator",
   "version": "1.0.0",
-  "description": "generates readme files",
+  "description": "Generate teams profile based on input feedback",
   "main": "index.js",
   "directories": {
     "test": "test"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/rpkrupali1/wk9-challenge-readme-generator.git"
+    "url": "git+https://github.com/rpkrupali1/wk10-challenge-TeamProfileGenerator.git"
   },
-  "author": "krupali",
+  "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/rpkrupali1/wk9-challenge-readme-generator/issues"
+    "url": "https://github.com/rpkrupali1/wk10-challenge-TeamProfileGenerator/issues"
   },
-  "homepage": "https://github.com/rpkrupali1/wk9-challenge-readme-generator#readme",
+  "homepage": "https://github.com/rpkrupali1/wk10-challenge-TeamProfileGenerator#readme",
   "dependencies": {
     "inquirer": "^8.2.0"
+  },
+  "devDependencies": {
+    "jest": "^27.4.7"
   }
 }
