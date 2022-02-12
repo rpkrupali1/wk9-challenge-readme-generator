@@ -3,7 +3,7 @@
 
    [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)  [![License: Apache](https://img.shields.io/badge/License-Apache-yellow.svg)](https://opensource.org/licenses/Apache) 
 
-  # Table of contents
+  # Table of contents 
   * [Purpose](#purpose)
   * [Installation Guidelines](#installation-guidelines)
   * [Usage](#usage)
