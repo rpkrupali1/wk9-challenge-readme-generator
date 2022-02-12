@@ -67,9 +67,9 @@
   
   THEN I am taken to the corresponding section of the README
 
-  Please watch below video on team profile is generated on executing this application: 
+  Please watch below video on how read me is generated on executing this application: 
 
-  https://drive.google.com/file/d/1B3EX_GkO13Sa_KfLmYxWQocS_YmUl7T-/view
+  https://user-images.githubusercontent.com/38411252/151729745-05a8a2a4-f5b3-43fd-92fb-5faf88b5045e.mp4
 
 
 
